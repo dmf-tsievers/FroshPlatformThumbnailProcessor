@@ -13,9 +13,11 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
 
     public function getUrl(string $mediaUrl, string $mediaPath, string $width, ?\DateTimeInterface $mediaUpdatedAt): string
     {
+        $timestamp = $mediaUpdatedAt !== null ? $mediaUpdatedAt->getTimestamp() : '0';
+
         return str_replace(
             ['{mediaUrl}', '{mediaPath}', '{width}', '{mediaUpdatedAt}'],
-            [$mediaUrl, $mediaPath, $width, $mediaUpdatedAt?->getTimestamp() ?: '0'],
+            [$mediaUrl, $mediaPath, $width, $timestamp],
             $this->getPattern()
         );
     }

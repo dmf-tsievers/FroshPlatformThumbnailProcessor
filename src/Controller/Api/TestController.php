@@ -83,7 +83,7 @@ class TestController
             ->searchIds($criteria, $context)
             ->getIds();
 
-        if (!empty($ids[0]) && \is_string($ids[0])) {
+        if (isset($ids[0]) && \is_string($ids[0])) {
             return $ids[0];
         }
 
@@ -100,7 +100,7 @@ class TestController
         $pathInfo = pathinfo($testFile);
 
         $existingMedia = $this->getMediaById($pathInfo['filename'], $context);
-        if ($existingMedia) {
+        if ($existingMedia !== null) {
             return $existingMedia;
         }
 
@@ -130,7 +130,7 @@ class TestController
         );
 
         $existingMedia = $this->getMediaById($pathInfo['filename'], $context);
-        if ($existingMedia) {
+        if ($existingMedia !== null) {
             return $existingMedia;
         }
 
